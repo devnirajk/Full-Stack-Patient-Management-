@@ -24,9 +24,6 @@ This project is a Full-Stack Patient Management Web Application built using Spri
 ### Setup Instructions
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repository.git
-   ```
 
 2. **Backend Setup**:
    - Navigate to the backend directory:
