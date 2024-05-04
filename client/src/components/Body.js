@@ -4,12 +4,12 @@ import Dashboard from "./Dashboard";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
-        // {
-        //     path: "/",
-        //     element: <Login />
-        // },
         {
             path: "/",
+            element: <Login />
+        },
+        {
+            path: "patients",
             element: <Dashboard />
         }
   ]);

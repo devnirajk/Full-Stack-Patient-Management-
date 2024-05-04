@@ -30,7 +30,7 @@ const AddPatientForm = () => {
   };
 
   return (
-    <div className="flex flex-col w-1/3 items-center justify-center bg-gray-800 border px-32 rounded-md shadow-md">
+    <div className="flex h-96 flex-col w-1/3 items-center justify-center bg-gray-800 border px-32 rounded-md shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-white">Add Patient</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -85,7 +85,7 @@ const Dashboard = () => {
             <Header />
             <div className='flex w-full justify-evenly mt-4'>
                 <AddPatientForm />
-                {(patientRecords.length===0)?(<h1>No Patient Data</h1>):(<div className="">
+                {(patientRecords.length===0)?(<h1 className='text-white font-semibold text-2xl bg-slate-600 h-10 px-2 rounded-md'>No Patient Data</h1>):(<div className="">
                     {patientRecords?.map(patientDetail => (
                         <PatientComponent key={patientDetail.id} details={patientDetail} />
                     ))}

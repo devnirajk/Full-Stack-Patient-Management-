@@ -1,19 +1,39 @@
 import React, {useState, useRef} from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-
-  const [showSignUp, setShowSignUp] = useState(false);
-  
-  const handleSignUp = () =>{
-    // const status = validateData(email.current.value, password.current.value);
-  }
-
   const [errorMsg, setErrorMsg] = useState("");
-
   const email = useRef("");
   const password = useRef("");
+  
 
+  const handleSubmit = async (event) => {
+    // event.preventDefault(); 
+  
+    try {
+      const response = await fetch('http://localhost:8080/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email.current.value, password: password.current.value }),
+      });
+      if (response.ok) {
+        //  successful response
+        console.log('Login successful');
+      } else {
+        //  error response
+        setErrorMsg('Login failed');
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  const handleSignUp = async () =>{
+    await handleSubmit();
+  }
 
 
   return (
@@ -25,23 +45,22 @@ const Login = () => {
             alt="backgroundImage"/>
         <div className='absolute top-36 left-[38%] w-3/12 h-[600px] pt-[60px] pr-[40px] pb-[40px] pl-[40px] bg-black opacity-90 rounded-md'>
             
-            <h1 className='text-white font-semibold font-sans text-3xl mb-4'>
-              {showSignUp?"Sign Up":"Sign In"}
-            </h1>
-
+      
+            <h1 className='text-white font-semibold text-2xl'>Sign In</h1>
             <form action="" onSubmit={(e)=>e.preventDefault()}>
-            {(showSignUp) && <input type="text" placeholder='Your Name' className=' text-lg p-3 my-3 w-full rounded-sm bg-gray-600 text-white outline-none'/>}
             <input ref={email} type="text" placeholder='Email' className=' text-lg p-3 my-3 w-full rounded-sm bg-gray-600 text-white outline-none'/>
             <input ref={password} type="password" placeholder='Password' className='text-lg p-3 my-3  w-full rounded-sm bg-gray-600 text-white outline-none'/>
             <h1 className='text-sm font-medium text-orange-600'>{errorMsg}</h1>
-            <button className='p-3 my-7 bg-red-700 opacity-100 w-full rounded-sm text-white font-semibold text-lg'>
-            {showSignUp?"Get Started":"Sign In"}
+            <Link to="/patients">
+            <button
+            onClick={handleSignUp}
+            className='p-3 my-7 bg-red-700 opacity-100 w-full rounded-sm text-white font-semibold text-lg'>
+            Sign In
             </button>
+            </Link>
             </form>
             <div>
-              <p className='text-white cursor-pointer' onClick={handleSignUp}>
-              {showSignUp?"Go to Sign In.":"New to Netflix? Sign up now."}
-              </p>
+            <h1>{errorMsg}</h1>            
             </div>
         </div> 
         </div>
